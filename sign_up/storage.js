@@ -60,7 +60,7 @@ signupForm.addEventListener("submit", function(event) {
 
     //Redirect to Login page: include mini delay
     setTimeout(function() {
-        window.location.href = "login.html";
+        window.location.href = "../log_in/login.html";
     }, 1500);
 });
 
