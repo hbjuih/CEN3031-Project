@@ -14,7 +14,7 @@ loginForm.addEventListener("submit", function(event) {
     const storageKey = `user_${normalizedUsername}`;
     const savedUser = localStorage.getItem(storageKey);
 
-    //const rememberMe = document.getElementById("rmemeberMe").checked;
+    //const rememberMe = document.getElementById("rememberMe").checked;
 
     if (savedUser === null) {
         showMessage("Username or password is incorrect.", "white");
@@ -31,7 +31,7 @@ loginForm.addEventListener("submit", function(event) {
 
     showMessage("Login successful!", "white");
 
-   const rememberMe = document.getElementById("rmemeberMe");
+   const rememberMe = document.getElementById("rememberMe");
 
    if (rememberMe.checked) {
     //remebers after browser is closed
