@@ -1,0 +1,6 @@
+<div class="sidebar">
+    <a href="/login" class="login-btn">Log In</a>
+    <a href="/signup" class="signup-btn">Sign Up</a>
+    <a href="/plans" class="landing-link {{ 'active' if request.endpoint == 'plans' else '' }}">Plans</a>
+    <a href="/about" class="landing-link {{ 'active' if request.endpoint == 'about' else '' }}">About Us</a>
+</div>

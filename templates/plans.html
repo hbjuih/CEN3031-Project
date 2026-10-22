@@ -1,0 +1,18 @@
+{% extends "nav-bar.html" %}
+{% block title %}Notesy{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='landing-page.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='landing-page-sidebar.css') }}">
+{% endblock %}
+
+{% block sidebar%}
+  {% include "landing-page-sidebar.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="welcome-box">
+    <h1>Plans</h1>
+    <p>We are currently working on implementing a subscription plan for Notesy. Stay tuned for updates! For now enjoy the free version!</p>
+  </div>
+{% endblock %}

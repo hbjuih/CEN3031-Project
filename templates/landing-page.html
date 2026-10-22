@@ -1,0 +1,26 @@
+{% extends "nav-bar.html" %}
+{% block title %}Notesy{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='landing-page.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='landing-page-sidebar.css') }}">
+{% endblock %}
+
+{% block sidebar%}
+  {% include "landing-page-sidebar.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="welcome-box">
+    {% if current_user %}
+      <h1>Welcome back, {{ current_user["name"] }}!</h1>
+    {% else %}
+      <h1>Welcome!</h1>
+      
+      <div class="welcome-buttons">
+        <a href="/login" class="login-btn1">Log In</a>
+        <a href="/signup" class="signup-btn1">Sign Up</a>
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}

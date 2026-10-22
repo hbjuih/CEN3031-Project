@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Notesy, Notes, Notes App, Note Taking App, Note Taking, Note Taking Application, Note Taking Software, Note Taking Tool, Note Taking Platform, Note Taking Service">
+    <meta name="description" content="Notesy is a simple and easy to use note taking app that allows you to take notes and organize them in a simple and easy to use way.">
+    <title>NavBar</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='nav-bar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='sidebar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='landing-page-sidebar.css') }}">
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <header class="navbar">
+        <nav>
+            <a href="/" class="logo">
+                <img src="{{ url_for('static', filename='images/notepad.png') }}" alt="Notesy Logo">
+                <span>Notesy</span>
+            </a>
+            <div class="profile">
+                <button class="profile-button" id="profile-button" {% if current_user %}disabled{% endif %}>
+                    <img src="{{ url_for('static', filename='images/default-profile-pic.png') }}" alt="Profile">
+                </button>
+                <div class="dropdown" id="dropdown">
+                    <a href="/account" class="{{ 'active' if request.endpoint == 'account' else '' }}">Account</a>
+                    <a href="/logout" class="{{ 'active' if request.endpoint == 'logout' else '' }}">Logout</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="layout">
+        {% block sidebar %}{% endblock %}
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+<script src="{{ url_for('static', filename='js/nav-bar.js') }}"></script>
+</body>
+</html>

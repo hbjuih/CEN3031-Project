@@ -1,0 +1,33 @@
+/* Mobile */
+@media (min-width: 0) and (max-width: 599px) {
+    main {
+        margin: 25px;
+    }
+
+    section {
+        width: 100%;
+    }
+}
+
+/* Tablet */
+@media (min-width: 600px) and (max-width: 1279px) {
+    main {
+        margin: 25px;
+    }
+
+    section {
+        width: 100%;
+    }
+}
+
+/* PC */
+@media (min-width: 1280px) and (max-width: 5000px) {
+    main {
+        margin: 25px;
+    }
+
+    section {
+        width: 100%;
+    }
+}
+

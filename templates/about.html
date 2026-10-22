@@ -1,0 +1,18 @@
+{% extends "nav-bar.html" %}
+{% block title %}Notesy{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='landing-page.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='landing-page-sidebar.css') }}">
+{% endblock %}
+
+{% block sidebar%}
+  {% include "landing-page-sidebar.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="welcome-box">
+    <h1>About Notesy</h1>
+    <p>Welcome to Notesy! We're a simple note-taking app created by students for students.</p>
+  </div>
+{% endblock %}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Notesy, Notes, Notes App, Note Taking App, Note Taking, Note Taking Application, Note Taking Software, Note Taking Tool, Note Taking Platform, Note Taking Service">
+    <meta name="description" content="Notesy is a simple and easy to use note taking app that allows you to take notes and organize them in a simple and easy to use way.">
+    <title>Notesy</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='sidebar.css') }}">
+</head>
+
+<div>
+    <form class="search" action="/search" method="get">
+        <input type="search" placeholder="Search..." name="query">
+    </form>
+    <a href="/notes/new" class="new-note-button">New Note</a>
+    <ul>
+        <li><a href="/" class="{{ 'active' if request.endpoint == 'home' else '' }}">Home</a></li>
+        <li><a href="/notebooks" class="{{ 'active' if request.endpoint == 'notebooks' else '' }}">Notebooks</a></li>
+        <li><a href="/notes" class="{{ 'active' if request.endpoint == 'notes' else '' }}">Notes</a></li>
+        <li><a href="/tags" class="{{ 'active' if request.endpoint == 'tags' else '' }}">Tags</a></li>
+        <li><a href="/templates" class="{{ 'active' if request.endpoint == 'templates' else '' }}">Templates</a></li>
+    </ul>
+</div>

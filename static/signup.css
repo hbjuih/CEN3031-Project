@@ -1,0 +1,147 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    min-height: 100vh;
+    min-height: 100svh;
+    padding: 30px 8%;
+
+    background: rgb(99, 148, 120);
+    overflow-x: hidden;
+}
+
+.left-image {
+    position: absolute;
+    left: 8%;
+    top: 50%;
+    transform:translateY(-50%);
+
+    width: min(35vw, 450px);
+    height: auto;
+
+    object-fit: contain;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+}
+
+.wrapper {
+    position: relative;
+    z-index: 1;
+
+    width: 320px;
+    background: transparent;
+    color: rgb(122, 81, 27);
+    border-radius: 22px;
+    padding: 30px 40px;
+    margin-right: 8%;
+}
+
+.wrapper h1{
+    font-size: 36px;
+    text-align: center;
+}
+
+.wrapper .input-box{
+    width: 100%;
+    height: 50px;
+    margin: 22px 0;
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    outline: none;
+    border-radius: 40px;
+    font-size: medium;
+    color: #fff;
+    padding: 20px;
+}
+
+.input-box input::placeholder {
+    color: #fff;
+}
+
+.wrapper .btn {
+    width: 100%;
+    height: 45px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.wrapper .btn:hover {
+    background: rgb(238, 238, 238);
+}
+
+.wrapper .register-link {
+    font-size: 14.5px;
+    text-align: center;
+    margin: 20px 0 15px;
+}
+
+.register-link p a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 5px;
+}
+
+.register-link p a:hover {
+    text-decoration: underline;
+}
+
+#message {
+    min-height: 20px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+/*Adjust form to tablet size*/
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+        justify-content: center;
+        gap: 20px;
+        padding: 25px;
+    }
+
+    .left-image {
+        position: relative;
+        left: auto;
+        top: auto;
+        transform: none;
+
+        width: min(55vw, 250px);
+        opacity: 0.9;
+        z-index: 0;
+    }
+
+    .wrapper {
+        width: 90%;
+        max-width: 380px;
+        margin-right: 0;
+        padding: 25px;
+    }
+
+    .wrapper h1{
+        font-size: 30px;
+    }
+}
