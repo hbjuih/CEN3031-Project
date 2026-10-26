@@ -1,0 +1,32 @@
+{% extends "nav-bar-home.html" %}
+{% block title %}Notesy{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='home-page-sidebar.css') }}">
+{% endblock %}
+
+{% block sidebar%}
+  {% include "home-page-sidebar.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="welcome-box">
+    <h1>Welcome back!</h1>  
+    {# Un Comment Once DB Connection Is Done
+    <h1>Welcome back, {{ current_user["username"] }}!</h1>
+
+      <div class="recent-notes">
+        {% for note in recent_notes %}
+          <a href="/notes/{{ note['id'] }}" class="note-card">
+            <span class="note-title">{{ note["title"] or "Untitled" }}</span>
+            <span class="note-preview">{{ note["content"]|striptags|truncate(80) }}</span>
+            <span class="note-date">{{ note["updated_at"][:10] }}</span>
+          </a>
+          {% else %}
+            <p>No notes yet. Click "+ Note" to create one!</p>
+          {% endfor %}
+      </div>
+    #}
+  </div>
+{% endblock %}

@@ -1,0 +1,12 @@
+<div class="sidebar">
+    <a href="/notes/new" class="landing-link" id="new-note-btn">+ Note</a>
+    <form action="/search" method="get" class="search">
+        <input type="search" name="query" placeholder="Search...">
+    </form>
+    <a href="/home" class="login-btn">Home</a>
+    <a href="/notebooks" class="signup-btn">Notebooks</a>
+    <a href="/notes" class="landing-link {{ 'active' if request.endpoint == 'notes' else '' }}">Notes</a>
+    <a href="/tags" class="landing-link {{ 'active' if request.endpoint == 'tags' else '' }}">Tags</a>
+    <a href="/templates" class="landing-link {{ 'active' if request.endpoint == 'templates' else '' }}">Templates</a>
+    <a href="/shared" class="landing-link {{ 'active' if request.endpoint == 'shared' else '' }}">Shared</a>
+</div>

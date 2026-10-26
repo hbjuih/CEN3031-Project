@@ -1,0 +1,55 @@
+{% extends "nav-bar-home.html" %}
+{% block title %}Edit My Account{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='account-edit.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='home-page-sidebar.css') }}">
+{% endblock %}
+
+{% block sidebar%}
+  {% include "home-page-sidebar.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="welcome-box">
+    <div>
+        <h1>Edit My Account</h1>
+        <p>Edit your account information.</p>
+    </div>
+        <form action="{{ url_for('account_page') }}" method="GET" class="edit-account-form">
+            <section class="account-section">
+            <h2>Account Information</h2>
+            <div class="account-details">
+                <div class="detail-item">
+                    <span class="label">Name</span>
+                    <input class="main" type="text" id="name" name="name" value="{{ current_user['name'] if current_user else '' }}">
+                </div>
+                
+                <div class="detail-item">
+                    <span class="label">Username</span>
+                    <input class="main" type="text" id="username" name="username" value="{{ current_user['username'] if current_user else '' }}">
+                </div>
+
+                <div class="detail-item">
+                    <span class="label">Email</span>
+                    <span class="value">
+                        <input class="main" type="email" id="email" name="email" value="{{ current_user['email'] if current_user else '' }}">
+                    </span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">New Password</span>
+                    <input class="main" type="password" id="password" name="password" value="{{ current_user['password'] if current_user else '' }}">
+                </div>
+                <div class="detail-item">
+                    <span class="label">Date of Birth</span>
+                    <input class="main" type="date" id="birthday" name="birthday" value="{{ current_user['birthday'] if current_user else '' }}">
+                </div>
+                <div class="edit-b">
+                    <a href="{{ url_for('account_page') }}" class="cancel-edit-b">Cancel</a>
+                    <button type="submit" class="save-edit-button">Save</button>
+                </div>
+            </div>
+        </form>
+
+    </section>
+{% endblock %}

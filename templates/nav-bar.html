@@ -19,12 +19,12 @@
                 <span>Notesy</span>
             </a>
             <div class="profile">
-                <button class="profile-button" id="profile-button" {% if current_user %}disabled{% endif %}>
+                <button class="profile-button" id="profile-button">
                     <img src="{{ url_for('static', filename='images/default-profile-pic.png') }}" alt="Profile">
                 </button>
                 <div class="dropdown" id="dropdown">
-                    <a href="/account" class="{{ 'active' if request.endpoint == 'account' else '' }}">Account</a>
-                    <a href="/logout" class="{{ 'active' if request.endpoint == 'logout' else '' }}">Logout</a>
+                    <a id="first" href="/login" class="{{ 'active' if request.endpoint == 'login' else '' }}">Log In</a>
+                    <a href="/signup" class="{{ 'active' if request.endpoint == 'signup' else '' }}">Sign Up</a>
                 </div>
             </div>
         </nav>

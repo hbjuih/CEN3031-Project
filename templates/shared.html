@@ -1,0 +1,18 @@
+{% extends "nav-bar-home.html" %}
+{% block title %}Notesy{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='shared.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='home-page-sidebar.css') }}">
+{% endblock %}
+
+{% block sidebar%}
+  {% include "home-page-sidebar.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="welcome-box">
+    <h1>Nothing has been shared with you yet!</h1>
+    <p>Connect With Others!</p>
+  </div>
+{% endblock %}

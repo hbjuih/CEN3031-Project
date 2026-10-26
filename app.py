@@ -278,6 +278,53 @@ def signup_page():
 def login_page():
     return render_template('login.html')
 
+@app.route('/home')
+# @login_required Uncomment Once Finished
+def home_page():
+    #user = g.user
+    #db = get_db()
+    #recent_notes = db.execute("SELECT * FROM notes WHERE owner_id = ? ORDER BY updated_at DESC LIMIT 3", (user["id"],)).fetchall()
+    return render_template('home.html')
+    #return render_template('home.html', recent_notes=recent_notes, current_user=user) Delete Above and Uncomment This
+
+@app.route("/search")
+@login_required
+def search():
+    q = request.args.get("query", "").strip()
+
+    notes, notebooks, tags = [], [], []
+    # Finish This.
+
+    return render_template("search,html")
+
+@app.route('/templates')
+def templates():
+    return render_template('templates.html')
+
+@app.route('/tags')
+def tags_page():
+    return render_template("tags.html")
+
+@app.route('/shared')
+def shared():
+    return render_template("shared.html")
+
+@app.route('/notes')
+def notes_page():
+    return render_template("notes.html")
+
+@app.route('/notebooks')
+def notebooks_page():
+    return render_template("notebooks.html")
+
+@app.route('/account')
+def account_page():
+    return render_template("account.html")
+
+@app.route('/account-edit')
+def account_edit_page():
+    return render_template("account-edit.html")
+
 init_db()
 
 if __name__ == "__main__":

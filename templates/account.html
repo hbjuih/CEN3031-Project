@@ -1,0 +1,97 @@
+{% extends "nav-bar-home.html" %}
+{% block title %}My Account{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='account.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='home-page-sidebar.css') }}">
+{% endblock %}
+
+{% block sidebar%}
+  {% include "home-page-sidebar.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="welcome-box">
+    <div>
+        <h1>My Account</h1>
+        <p>Manage your account information.</p>
+    </div>
+    <a href="{{ url_for('account_edit_page') }}" class="edit-btn">Edit Account</a>
+    
+    <!-- Account Info -->
+    <section class="account-section">
+        <h2>Account Information</h2>
+        <div class="account-details">
+            <div class="detail-item">
+                <span class="label">Name</span>
+                <span class="value">
+                    {{ current_user["name"] if current_user else "Not Available At This Time" }}
+                </span>
+            </div>
+
+            <div class="detail-item">
+                <span class="label">Username</span>
+                <span class="value">
+                    {{ current_user["username"] if current_user else "Not Available At This Time" }}
+                </span>
+            </div>
+
+            <div class="detail-item">
+                <span class="label">Email</span>
+                <span class="value">
+                    {{ current_user["email"] if current_user else "Not Available At This Time" }}
+                </span>
+            </div>
+            <div class="detail-item">
+                <span class="label">Password</span>
+                <span class="value">********</span>
+            </div>
+            <div class="detail-item">
+                <span class="label">Date of Birth</span>
+                <span class="value">XX-XX-XXXX</span>
+            </div>
+            <div class="detail-item" id="last-detail">
+                <span class="label">Member Since</span>
+                <span class="value">XX-XX-XXXX</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Billing -->
+    <section class="account-section">
+        <h2>Billing</h2>
+        <div class="placeholder">
+            <p>Coming Soon!</p>
+        </div>
+    </section>
+
+    <!-- Plan -->
+    <section class="account-section">
+        <h2>Plan</h2>
+        <div class="placeholder">
+            <p>Coming Soon!</p>
+        </div>
+    </section>
+
+    <!-- Account Deletion -->
+
+    <section class="account-section" id="last-section">
+        <h2>Delete Account</h2>
+        <p> Deleting your account will permanently remove your account information and you will lose ALL notes.</p>
+        <button type="button" id="delete-account-btn" class="delete-button">Delete Account</button>
+    </section>
+
+    <div id="deletion" class="overlay" hidden>
+        <div class="box" role="dialog">
+            <h2 id="delete-title">Are you sure?</h2>
+            <p>This action is permanent.</p>
+            <div class="delete-buttons">
+                <button type="button" id="cancel-delete" class="cancel-button">Cancel</button>
+                <button type="button" id="confirm-delete" class="confirm-button">Yes, Delete</button>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/account.js') }}"></script>
+{% endblock %}

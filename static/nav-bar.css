@@ -147,8 +147,13 @@ body {
     color: black;
 }
 
+#first {
+    border-bottom: 1px solid black;
+}
+
 .dropdown a:hover {
-    text-decoration: underline;
+    color: white;
+    font-weight: bold;
 }
 
 .profile-button:disabled {
