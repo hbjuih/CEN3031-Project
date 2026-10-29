@@ -16,9 +16,12 @@
         <h1>Edit My Account</h1>
         <p>Edit your account information.</p>
     </div>
-        <form action="{{ url_for('account_page') }}" method="GET" class="edit-account-form">
+        <form action="{{ url_for('account_edit_page') }}" method="POST" class="edit-account-form">
             <section class="account-section">
             <h2>Account Information</h2>
+            {% if error %}
+                <p class="form-error" style="color: #e05252;">{{ error }}</p>
+            {% endif %}
             <div class="account-details">
                 <div class="detail-item">
                     <span class="label">Name</span>
@@ -38,7 +41,7 @@
                 </div>
                 <div class="detail-item">
                     <span class="label">New Password</span>
-                    <input class="main" type="password" id="password" name="password" value="{{ current_user['password'] if current_user else '' }}">
+                    <input class="main" type="password" id="password" name="password" placeholder="Leave blank to keep current password">
                 </div>
                 <div class="detail-item">
                     <span class="label">Date of Birth</span>
@@ -49,7 +52,7 @@
                     <button type="submit" class="save-edit-button">Save</button>
                 </div>
             </div>
+            </section>
         </form>
-
-    </section>
+    </div>
 {% endblock %}

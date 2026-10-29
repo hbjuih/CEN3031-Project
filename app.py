@@ -44,7 +44,7 @@ def init_db():
 
 def user_to_dict(row):
     return {"id": row["id"], "username": row["username"], "email": row["email"],
-            "role": row["role"], "created_at": row["created_at"]}
+            "name": row["name"], "birthday": row["birthday"], "role": row["role"], "created_at": row["created_at"]}
 
 
 def note_to_dict(row):
@@ -319,11 +319,61 @@ def notebooks_page():
 
 @app.route('/account')
 def account_page():
-    return render_template("account.html")
+    user = account_user()
+    return render_template("account.html", current_user=user, birthday=format_date(user["birthday"]) if user else "", member_since=format_date(user["created_at"]) if user else "",)
 
-@app.route('/account-edit')
+@app.route('/account-edit', methods=["GET", "POST"])
 def account_edit_page():
-    return render_template("account-edit.html")
+    user = account_user()
+    if user is None:
+        return redirect("/account")
+
+    if request.method == "GET":
+        return render_template("account-edit.html", current_user=user)
+
+    name = request.form.get("name", "").strip()
+    username = request.form.get("username", "").strip()
+    email = request.form.get("email", "").strip()
+    password = request.form.get("password", "")
+    birthday = request.form.get("birthday", "").strip()
+
+    def show_error(message):
+        return render_template("account-edit.html", current_user=user, error=message), 400
+
+    if not username:
+        return show_error("Please enter a username.")
+    if not email:
+        return show_error("Please enter an email.")
+    if password and len(password) < 6:
+        return show_error("Password must be at least 6 characters long.")
+
+    db = get_db()
+    try:
+        db.execute("UPDATE users SET name = ?, username = ?, email = ?, birthday = ? WHERE id = ?", (name, username, email, birthday, user["id"]))
+        if password:
+            db.execute("UPDATE users SET password = ? WHERE id = ?", (password, user["id"]))
+        db.commit()
+    except sqlite3.IntegrityError:
+        return show_error("That username is already taken; please try again.")
+    
+    return redirect("/account")
+
+# ----------- Delete After Connections Made -------------
+
+DEMO_USER_ID = 1
+
+def account_user():
+    user = current_user()
+    if user is None:
+        user = get_db().execute("SELECT * FROM users WHERE id = ?", (DEMO_USER_ID,)).fetchone()
+    return user
+
+def format_date(value):
+    """'2026-10-26 16:12:44' or '2026-10-26' -> '10-26-2026'."""
+    if not value:
+        return "Not set"
+    year, month, day = value[:10].split("-")
+    return f"{month}-{day}-{year}"
 
 init_db()
 

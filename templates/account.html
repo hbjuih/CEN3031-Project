@@ -44,15 +44,15 @@
             </div>
             <div class="detail-item">
                 <span class="label">Password</span>
-                <span class="value">********</span>
+                <span class="value">******</span>
             </div>
             <div class="detail-item">
                 <span class="label">Date of Birth</span>
-                <span class="value">XX-XX-XXXX</span>
+                <span class="value">{{ birthday if current_user else "Not Available At This Time" }}</span>
             </div>
             <div class="detail-item" id="last-detail">
                 <span class="label">Member Since</span>
-                <span class="value">XX-XX-XXXX</span>
+                <span class="value">{{ member_since if current_user else "Not Available At This Time" }}</span>
             </div>
         </div>
     </section>

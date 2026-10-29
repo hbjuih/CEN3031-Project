@@ -4,6 +4,8 @@ CREATE TABLE IF NOT EXISTS users (
     email         TEXT NOT NULL,
     password      TEXT NOT NULL,
     role          TEXT NOT NULL DEFAULT 'member',       -- 'member' or 'admin'
+    name          TEXT NOT NULL DEFAULT '',
+    birthday      TEXT NOT NULL DEFAULT '',             -- YYYY-MM-DD
     created_at    TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
