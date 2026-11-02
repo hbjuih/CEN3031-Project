@@ -30,12 +30,12 @@
             <button type="submit" class="btn">Login</button>
             
             <div class="register-link">
-                <p>Dont have an account? <a href="/sign_up">Register</a></p>
+                <p>Dont have an account? <a href="{{ url_for('signup_page') }}">Register</a></p>
             </div>
             <p id="message" role="status"></p>
         </form>
     </div>
 
-    <script src="{{ url_for('static', filename='login.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/login.js') }}" defer></script>
 </body>
 </html>

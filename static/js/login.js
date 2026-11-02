@@ -1,7 +1,8 @@
 const loginForm = document.getElementById("loginForm");
 const message = document.getElementById("message");
 
-loginForm.addEventListener("submit", function(event) {
+//async function allows /api/login to handle authentication
+loginForm.addEventListener("submit", async function(event) {
     event.preventDefault();
 
     const usernameInput = document.getElementById("username");
@@ -10,49 +11,33 @@ loginForm.addEventListener("submit", function(event) {
     const username = usernameInput.value.trim();
     const password = passwordInput.value;
 
-    const normalizedUsername = username.toLowerCase();
-    const storageKey = `user_${normalizedUsername}`;
-    const savedUser = localStorage.getItem(storageKey);
+    const remember = document.getElementById("rememberMe")?.checked ?? false;
 
-    //const rememberMe = document.getElementById("rememberMe").checked;
+    try {
+        const response = await fetch("/api/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "same-origin",
+            body: JSON.stringify({ username, password , remember })
+        });
 
-    if (savedUser === null) {
-        showMessage("Username or password is incorrect.", "white");
-        return;
-    }
+        const data = await response.json();
 
-    const userData = JSON.parse(savedUser);
+        if (!response.ok) {
+            showMessage(data.error || "Username or password is incorrect.", "white");
+            passwordInput.value = "";
+            return;
+        }
 
-    if (password !== userData.password) {
-        showMessage("Username or password is incorrect.", "white");
-        passwordInput.value = "";
-        return;
-    }
+        showMessage("Login successful!", "white");
+        loginForm.reset();
 
-    showMessage("Login successful!", "white");
+        //Redirect to Home page: include mini delay
+        setTimeout(() => {
+            window.location.href = "/home"; 
+        }, 1000);
 
-   const rememberMe = document.getElementById("rememberMe");
-
-   if (rememberMe.checked) {
-    //remebers after browser is closed
-    localStorage.setItem("loggedInUser", userData.username);
-    sessionStorage.removeItem("loggedInUser");
-    } else {
-        //remembers while browser session is open
-        sessionStorage.setItem("loggedInUser", userData.username);
-        localStorage.removeItem("loggedInUser");
-   }
-
-    //Claer form
-    loginForm.reset();
-
-    //Redirect to Home page: include mini delay
-    setTimeout(function() {
-        window.location.href = "home.html";
-    }, 1000);
+        } catch {
+            showMessage("Unable to log in. Please try again.", "white");
+        }
 });
-
-function showMessage(text, color) {
-    message.textContent = text;
-    message.style.color = color;
-}

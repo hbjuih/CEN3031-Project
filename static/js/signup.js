@@ -1,7 +1,7 @@
 const signupForm = document.getElementById("signupForm");
 const message = document.getElementById("message");
 
-signupForm.addEventListener("submit", function(event) {
+signupForm.addEventListener("submit", async function(event) {
     event.preventDefault();
 
     const usernameInput = document.getElementById("username")
@@ -15,11 +15,13 @@ signupForm.addEventListener("submit", function(event) {
     const password = passwordInput.value;
     const confirmPassword = confirmPasswordInput.value;
    
-    //Betty = betty
-    const normalizedUsername = username.toLowerCase();
-
-    if (username === "") {
+    if (!username) {
         showMessage("Please enter a username.", "white");
+        return;
+    }
+
+    if (!email) {
+        showMessage("Please enter an email.", "white");
         return;
     }
     
@@ -33,35 +35,32 @@ signupForm.addEventListener("submit", function(event) {
         return;
     }
 
-    //unique key creation using username
-    const storageKey = `user_${normalizedUsername}`;
+    try {
+        const response = await fetch("/api/signup", {
+            method: "POST",
+            headers: { "Content-Type" : "application/json" },
+            credentials: "same-origin",
+            body: JSON.stringify({username, email, password })
+        });
 
-    //check for existing username
-    if (localStorage.getItem(storageKey) !== null) {
-        showMessage("That username is already taken; please try again.", "white");
-        usernameInput.focus()
-        return;
+        const data = await response.json();
+
+        if (!response.ok) {
+            showMessage(data.error || "Could not create an account.", "white");
+            return;
+        }
+
+        showMessage("Account created successfully!", "white");
+        signupForm.reset();
+
+        //Redirect to Login page: include mini delay
+        setTimeout(() => {
+            window.location.href = "/login"; 
+        }, 1500);
+        
+    } catch {
+        showMessage("Unable to create an account. Please try again.", "white");
     }
-
-    const userData = {
-        username: username,
-        email: email,
-        password: password,
-        createdAt: new Date().toISOString()
-    };
-
-    //dynamically save user data
-    localStorage.setItem(storageKey, JSON.stringify(userData));
-
-    showMessage(`${username}'s account created successfully!`, "white");
-
-    //Claer form
-    signupForm.reset();
-
-    //Redirect to Login page: include mini delay
-    setTimeout(function() {
-        window.location.href = "../log_in/login.html";
-    }, 1500);
 });
 
 function showMessage(text, color) {
