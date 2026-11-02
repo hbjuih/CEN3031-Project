@@ -24,7 +24,7 @@
                 </button>
                 <div class="dropdown" id="dropdown">
                     <a id="first" href="/account" class="{{ 'active' if request.endpoint == 'account' else '' }}">Account</a>
-                    <a href="/logout" class="{{ 'active' if request.endpoint == 'logout' else '' }}">Logout</a>
+                    <a href="/login" id="logout-link">Logout</a>
                 </div>
             </div>
         </nav>
@@ -36,5 +36,19 @@
         </main>
     </div>
 <script src="{{ url_for('static', filename='js/nav-bar.js') }}"></script>
+<script>
+    document.getElementById("logout-link").addEventListener("click", async function (event) {
+        event.preventDefault();
+
+        try {
+            await fetch("/api/logout", {
+                method: "POST",
+                credentials: "same-origin"
+            });
+        } finally {
+            window.location.href = "/login";
+        }
+    });
+</script>
 </body>
 </html>
