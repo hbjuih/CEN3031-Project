@@ -41,3 +41,8 @@ loginForm.addEventListener("submit", async function(event) {
             showMessage("Unable to log in. Please try again.", "white");
         }
 });
+
+function showMessage(text, color) {
+    message.textContent = text;
+    message.style.color = color;
+}
