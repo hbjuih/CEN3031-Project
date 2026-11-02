@@ -1,18 +1,46 @@
+
 {% extends "nav-bar-home.html" %}
-{% block title %}Notesy{% endblock %}
+{% block title %}My Notes - Notesy{% endblock %}
 
 {% block head %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='notes.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='home-page-sidebar.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='notes.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='home-page-sidebar.css') }}">
 {% endblock %}
 
-{% block sidebar%}
-  {% include "home-page-sidebar.html" %}
+{% block sidebar %}
+    {% include "home-page-sidebar.html" %}
 {% endblock %}
 
 {% block content %}
-  <div class="welcome-box">
-    <h1>No Notes Found!</h1>
-    <p>Create One!</p>
-  </div>
+<div class="welcome-box notes-box">
+
+    <h1>My Notes</h1>
+
+    <p id="notes-message">Loading notes...</p>
+
+    <!-- Saved notes appear here -->
+    <div id="notes-list"></div>
+
+    <!-- Create or edit a note -->
+    <form id="new-note">
+        <h2 id="form-heading">New Note</h2>
+
+        <input type="text" id="note-title"
+               placeholder="Note Title" required>
+
+        <textarea id="note-content"
+                  placeholder="Write your note here..."
+                  rows="7"></textarea>
+
+        <div class="note-actions">
+            <button type="submit">Save Note</button>
+            <button type="button" id="cancel-edit" hidden>
+                Cancel
+            </button>
+        </div>
+    </form>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/notes.js') }}"></script>
 {% endblock %}
